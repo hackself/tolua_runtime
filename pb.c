@@ -49,6 +49,15 @@ struct __una_d   { double   x PACKED_DECL; };
 #pragma pack
 #endif
 
+extern void tolua_pushint64(lua_State* L, int64_t n);
+extern void tolua_pushuint64(lua_State *L, uint64_t n);
+
+extern int64_t tolua_toint64(lua_State* L, int n);
+extern uint64_t tolua_touint64(lua_State *L, int n);
+
+extern int tolua_isint64(lua_State *L, int n);
+extern int tolua_isuint64(lua_State *L, int n);
+
 static inline uint64_t __uld64(const void * r11)
 {
 	const struct __una_u64 *ptr = (const struct __una_u64 *) r11;
@@ -178,6 +187,17 @@ static int64_t _long(lua_State* L, int pos)
 
         errno = old;
     }
+	else if (type == LUA_TUSERDATA)
+	{
+		if (tolua_isint64(L,pos))
+		{
+			n = tolua_toint64(L,pos);
+		}
+		else
+		{
+			return luaL_error(L, "need type int64");
+		}
+	}
     
     return n;
 }
@@ -206,6 +226,17 @@ static uint64_t _ulong(lua_State* L, int pos)
 
         errno = old;
     }
+	else if (type == LUA_TUSERDATA)
+	{
+		if (tolua_isuint64(L,pos))
+		{
+			n = tolua_touint64(L,pos);
+		}
+		else
+		{
+			return luaL_error(L, "need type uint64");
+		}
+	}
         
     return n;
 }
@@ -301,9 +332,11 @@ static int pack_fixed64(lua_State *L, uint8_t* value)
 {
 #ifdef IS_LITTLE_ENDIAN
     lua_pushlstring(L, (char*)value, 8);
+	tolua_pushuint64(L,*((uint64_t*)value));
 #else
     uint64_t v = htole64(__uld64(value));
-    lua_pushlstring(L, (char*)&v, 8);
+    //lua_pushlstring(L, (char*)&v, 8);
+	tolua_pushuint64(L,v);
 #endif
     return 0;
 }
@@ -428,9 +461,10 @@ static int varint_decoder64(lua_State *L)
     }
     else
     {
-        char buf[64];
-        sprintf(buf, "%" PRIu64, unpack_varint(buffer, len));
-        lua_pushstring(L, buf);
+        // char buf[64];
+        // sprintf(buf, "%" PRIu64, unpack_varint(buffer, len));
+        // lua_pushstring(L, buf);
+		tolua_pushint64(L,(int64_t)unpack_varint(buffer, len));
         lua_pushinteger(L, len + pos);
     }
     return 2;
@@ -470,10 +504,11 @@ static int signed_varint_decoder64(lua_State *L)
     }
     else
     {
-        char buf[64];
-        sprintf(buf, "%" PRId64, (int64_t)unpack_varint(buffer, len));
-        lua_pushstring(L, buf);
-        lua_pushinteger(L, len + pos);
+        //char buf[64];
+       // sprintf(buf, "%" PRId64, (int64_t)unpack_varint(buffer, len));
+       // lua_pushstring(L, buf);
+        tolua_pushint64(L,(int64_t)unpack_varint(buffer, len));
+		lua_pushinteger(L, len + pos);
     }
     return 2;
 }
@@ -509,9 +544,10 @@ static int zig_zag_encode64(lua_State *L)
     }
     else 
     {
-      char temp[64];
-      sprintf(temp, "%" PRIu64, value);
-      lua_pushstring(L, temp);
+      // char temp[64];
+      // sprintf(temp, "%" PRIu64, value);
+      // lua_pushstring(L, temp);
+		tolua_pushuint64(L, value);
       return 1;
     }
 }
@@ -528,9 +564,10 @@ static int zig_zag_decode64(lua_State *L)
     }
     else 
     {
-        char temp[64];
-        sprintf(temp, "%" PRId64, value);
-        lua_pushstring(L, temp);
+        // char temp[64];
+        // sprintf(temp, "%" PRId64, value);
+        // lua_pushstring(L, temp);
+		tolua_pushint64(L, value);
         return 1;
     }    
 }
@@ -594,10 +631,11 @@ static int struct_unpack(lua_State *L)
             }
         case 'q':
             {
-                char temp[64];
+              //  char temp[64];
                 int64_t n = __ld64(unpack_fixed64(buffer, out));
-                sprintf(temp, "%" PRId64, n);    
-                lua_pushstring(L, temp);                                               
+                // sprintf(temp, "%" PRId64, n);    
+                // lua_pushstring(L, temp);    
+				tolua_pushint64(L,n);
                 break;
             }
         case 'f':
@@ -617,10 +655,11 @@ static int struct_unpack(lua_State *L)
             }
         case 'Q':
             {                
-                char temp[64];
+                //char temp[64];
                 uint64_t n = __uld64(unpack_fixed64(buffer, out));
-                sprintf(temp, "%" PRIu64, n);    
-                lua_pushstring(L, temp);                                    
+               // sprintf(temp, "%" PRIu64, n);    
+              //  lua_pushstring(L, temp);       
+				tolua_pushuint64(L,n);
                 break;
             }
         default:
