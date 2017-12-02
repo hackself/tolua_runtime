@@ -1,0 +1,5 @@
+[user]
+	name = topameng
+	email = topameng@gmail.com
+[core]
+	autocrlf = false

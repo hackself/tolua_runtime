@@ -23,3 +23,10 @@ https://github.com/diegonehab/luasocket<br>
 http://www.inf.puc-rio.br/~roberto/struct/<br>
 **lpeg**<br>
 http://www.inf.puc-rio.br/~roberto/lpeg/lpeg.html
+
+=================
+设置环境变量 D:\android-ndk-r10e\prebuilt\windows-x86_64\bin\;D:\tolua_runtime\mysys\mingw32\bin;D:\android-ndk-r10e;D:\tolua_runtime\mysys\usr\bin\
+win32 使用 mingw32编译
+win64 使用 mingw64编译
+android 使用 mingw32编译
+注意不同平台的换行符的不同引起的编译报错

@@ -1,0 +1,141 @@
+************************************* Invoked: 周一 十二月 28 14:01:54 2015
+[0] Arguments:  C:\msys2-x86_64-20150916.exe
+[4] Operations sanity check succeeded.
+[2832] backup  operation: Mkdir
+[2832] \t- arguments: C:/msys64
+[2832] Done
+[2833] perform  operation: Mkdir
+[2833] \t- arguments: C:/msys64
+[2833] Done
+[2833] Install size: 2 components
+[2872] backup com.msys2.root.base operation: Extract
+[2872] \t- arguments: installer://com.msys2.root.base/20150916msys64.7z, C:\\msys64
+[2872] Done
+[2872] perform com.msys2.root.base operation: Extract
+[2872] \t- arguments: installer://com.msys2.root.base/20150916msys64.7z, C:\\msys64
+[16289] Done
+[16291] backup com.msys2.root.base operation: CreateShortcut
+[16291] \t- arguments: C:\\Windows\\system32\\cmd.exe, C:\\Users\\Administrator\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\MSYS2 64bit/MSYS2 Shell.lnk, /A /Q /K C:\\msys64\\msys2_shell.bat
+[16291] Done
+[16291] perform com.msys2.root.base operation: CreateShortcut
+[16291] \t- arguments: C:\\Windows\\system32\\cmd.exe, C:\\Users\\Administrator\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\MSYS2 64bit/MSYS2 Shell.lnk, /A /Q /K C:\\msys64\\msys2_shell.bat
+[16316] Done
+[16316] backup com.msys2.root.base operation: CreateShortcut
+[16316] \t- arguments: C:\\Windows\\system32\\cmd.exe, C:\\Users\\Administrator\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\MSYS2 64bit/MinGW-w64 Win32 Shell.lnk, /A /Q /K C:\\msys64\\mingw32_shell.bat
+[16316] Done
+[16316] perform com.msys2.root.base operation: CreateShortcut
+[16316] \t- arguments: C:\\Windows\\system32\\cmd.exe, C:\\Users\\Administrator\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\MSYS2 64bit/MinGW-w64 Win32 Shell.lnk, /A /Q /K C:\\msys64\\mingw32_shell.bat
+[16321] Done
+[16321] backup com.msys2.root.base operation: CreateShortcut
+[16321] \t- arguments: C:\\Windows\\system32\\cmd.exe, C:\\Users\\Administrator\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\MSYS2 64bit/MinGW-w64 Win64 Shell.lnk, /A /Q /K C:\\msys64\\mingw64_shell.bat
+[16321] Done
+[16321] perform com.msys2.root.base operation: CreateShortcut
+[16321] \t- arguments: C:\\Windows\\system32\\cmd.exe, C:\\Users\\Administrator\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\MSYS2 64bit/MinGW-w64 Win64 Shell.lnk, /A /Q /K C:\\msys64\\mingw64_shell.bat
+[16326] Done
+[16326] backup com.msys2.root.base operation: Execute
+[16326] \t- arguments: C:\\msys64\\autorebase.bat
+[16326] Done
+[16326] perform com.msys2.root.base operation: Execute
+[16326] \t- arguments: C:\\msys64\\autorebase.bat
+[16326] ElevatedExecuteOperation setNativeArguments to start: "C:\\msys64\\autorebase.bat"
+[16353] C:\\msys64\\autorebase.bat" started, arguments: "
+[17075] Done
+[17075] backup com.msys2.root.base operation: Execute
+[17075] \t- arguments: C:\\msys64\\usr\\bin\\bash.exe, --login, -c, exit
+[17075] Done
+[17075] perform com.msys2.root.base operation: Execute
+[17075] \t- arguments: C:\\msys64\\usr\\bin\\bash.exe, --login, -c, exit
+[17199] C:\\msys64\\usr\\bin\\bash.exe" started, arguments: "--login -c exit
+[17828] Copying skeleton files.\n
+[17838] These files are for the users to personalise their msys2 experience.\n\nThey will never be overwritten nor automatically updated.\n\n
+[17908] './.bashrc' -> '/home/topameng//.bashrc'\n
+[17918] './.bash_logout' -> '/home/topameng//.bash_logout'\n
+[17928] './.bash_profile' -> '/home/topameng//.bash_profile'\n
+[17938] './.inputrc' -> '/home/topameng//.inputrc'\n
+[17968] './.profile' -> '/home/topameng//.profile'\n
+[18118] 'C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts' -> '/etc/hosts'\n
+[18128] 'C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\protocol' -> '/etc/protocols'\n
+[18138] 'C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\services' -> '/etc/services'\n
+[18208] 'C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\networks' -> '/etc/networks'\n
+[19064] ==> Updating trust database...\n
+[19294] ==> Appending keys from msys2.gpg...\n
+[19344] ==> Locally signing trusted keys in keyring...\n
+[19414]   -> Locally signing key D55E7A6D7CE9BA1587C0ACACF40D263ECA25678A...\n
+[19484]   -> Locally signing key 123D4D51A1793859C2BE916BBBE514E53E0D0813...\n
+[19634]   -> Locally signing key B91BCF3303284BF90CC043CA9F418C233E652008...\n
+[19664]   -> Locally signing key 9DD0D4217D75A33B896159E6DA7EF2ABAEEA755C...\n
+[19814] ==> Importing owner trust values...\n
+[19824] ==> Updating trust database...\n
+[23154] gpgkeys: key 
+[23164] 0E982C95FFFF17FD09B4223E6B2C2FCD1EC2CB6D not found on keyserver\n
+[37025] --> Installing /usr/share/info/autosprintf.info.gz ...
+[37095]  done\n
+[37105] --> Installing /usr/share/info/bash.info.gz ...
+[37175]  done\n
+[37185] --> Installing /usr/share/info/configure.info.gz ...
+[37255]  done\n
+[37265] --> Installing /usr/share/info/coreutils.info.gz ...
+[37295]  done\n
+[37305] --> Installing /usr/share/info/find.info.gz ...
+[37375]  done\n
+[37385] --> Installing /usr/share/info/find-maint.info.gz ...
+[37455]  done\n
+[37465] --> Installing /usr/share/info/flex.info.gz ...
+[37495]  done\n
+[37505] --> Installing /usr/share/info/gawk.info.gz ...
+[37575]  done\n
+[37585] --> Installing /usr/share/info/gawkinet.info.gz ...
+[37655]  done\n
+[37665] --> Installing /usr/share/info/gettext.info.gz ...
+[37735]  done\n
+[37745] --> Installing /usr/share/info/gmp.info.gz ...
+[37815]  done\n
+[37825] --> Installing /usr/share/info/gnupg1.info.gz ...
+[37855]  done\n
+[37865] --> Installing /usr/share/info/grep.info.gz ...
+[37935]  done\n
+[37945] --> Installing /usr/share/info/gzip.info.gz ...
+[38015]  done\n
+[38025] --> Installing /usr/share/info/history.info.gz ...
+[38055]  done\n
+[38065] --> Installing /usr/share/info/inetutils.info.gz ...
+[38135]  done\n
+[38145] --> Installing /usr/share/info/info.info.gz ...
+[38215]  done\n
+[38225] --> Installing /usr/share/info/info-stnd.info.gz ...
+[38255]  done\n
+[38265] --> Installing /usr/share/info/libffi.info.gz ...
+[38335]  done\n
+[38345] --> Installing /usr/share/info/libgomp.info.gz ...
+[38415]  done\n
+[38425] --> Installing /usr/share/info/libidn.info.gz ...
+[38455]  done\n
+[38465] --> Installing /usr/share/info/libquadmath.info.gz ...
+[38535]  done\n
+[38545] --> Installing /usr/share/info/libtasn1.info.gz ...
+[38575]  done\n
+[38585] --> Installing /usr/share/info/m4.info.gz ...
+[38655]  done\n
+[38665] --> Installing /usr/share/info/mpfr.info.gz ...
+[38695]  done\n
+[38705] --> Installing /usr/share/info/readline.info.gz ...
+[38775]  done\n
+[38785] --> Installing /usr/share/info/rluserman.info.gz ...
+[38815]  done\n
+[38825] --> Installing /usr/share/info/sed.info.gz ...
+[38895]  done\n
+[38905] --> Installing /usr/share/info/standards.info.gz ...
+[38935]  done\n
+[38945] --> Installing /usr/share/info/time.info.gz ...
+[39015]  done\n
+[39025] --> Installing /usr/share/info/which.info.gz ...
+[39055]  done\n
+[40185] \x1B[3J\x1B[H\x1B[2J
+[40190] \n\n###################################################################\n#                                                                 #\n#                                                                 #\n#                   C   A   U   T   I   O   N                     #\n#                                                                 #\n#                  This is first start of MSYS2.                  #\n#       You MUST restart shell to apply necessary actions.        #\n#                                                                 #\n#                                                                 #\n###################################################################\n\n\n
+[40190] \x1B[3J\x1B[H\x1B[2J
+[40190] Done
+[40193] Writing maintenance tool: "C:\\msys64/maintenancetool.exe.new"
+[40242] Wrote permissions for maintenance tool.
+[40534] Maintenance tool restart: false.
+[40535] SHOW FINISHED PAGE
+[44781] starting "C:\\msys64/msys2_shell.bat" ()
