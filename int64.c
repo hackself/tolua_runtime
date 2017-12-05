@@ -36,7 +36,10 @@ SOFTWARE.
 #include "lauxlib.h"
 #include "tolua.h"
 
-static bool _isint64(lua_State* L, int pos)
+extern bool raw_isuint64(lua_State* L, int pos);
+extern int64_t raw_touint64(lua_State *L, int pos);
+
+LUALIB_API bool raw_isint64(lua_State* L, int pos)
 {
     if (lua_getmetatable(L, pos))
     {            
@@ -47,6 +50,11 @@ static bool _isint64(lua_State* L, int pos)
     }
     
     return false;
+}
+
+LUALIB_API int64_t raw_toint64(lua_State *L, int pos)
+{
+    return *(int64_t*)lua_touserdata(L, pos);
 }
 
 bool _str2long(const char *s, int64_t* result) 
@@ -86,7 +94,7 @@ LUALIB_API bool tolua_isint64(lua_State* L, int pos)
         return true;
     }
 
-    return _isint64(L, pos);
+    return raw_isint64(L, pos);
 }
 
 LUALIB_API void tolua_pushint64(lua_State* L, int64_t n)
@@ -144,9 +152,9 @@ LUALIB_API int64_t tolua_toint64(lua_State* L, int pos)
             }
             break;
         case LUA_TUSERDATA:     
-            if (_isint64(L, pos))
+            if (raw_isint64(L, pos))
             {
-                n = *(int64_t*)lua_touserdata(L, pos);            
+                n = raw_toint64(L,pos);            
             }
             break;    
         default:        
@@ -170,9 +178,9 @@ static int64_t tolua_checkint64(lua_State* L, int pos)
             n = _long(L, pos);
             break;
         case LUA_TUSERDATA:
-            if (_isint64(L, pos))
+            if (raw_isint64(L, pos))
             {
-                n = *(int64_t*)lua_touserdata(L, pos);
+                n = raw_toint64(L,pos);            
             }
             break;
         default:
@@ -339,6 +347,18 @@ static int _int64tonum2(lua_State* L)
     return 2;
 }
 
+static int _int64tonumber(lua_State *L)
+{
+    if (!tolua_isint64(L, 1))
+    {
+        return luaL_typerror(L, 1, "ulong");
+    }
+
+    int64_t n = tolua_toint64(L, 1);
+    lua_pushnumber(L,(lua_Number)n);
+    return 1;
+}
+
 int tolua_newint64(lua_State* L)
 {
     int64_t n = 0;
@@ -445,6 +465,10 @@ void tolua_openint64(lua_State* L)
 
     lua_pushstring(L, "tonum2");
     lua_pushcfunction(L, _int64tonum2);
+    lua_rawset(L, -3);        
+
+     lua_pushstring(L, "tonumber");
+    lua_pushcfunction(L, _int64tonumber);
     lua_rawset(L, -3);        
 
     lua_pushstring(L, "__index");

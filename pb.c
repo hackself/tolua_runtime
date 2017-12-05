@@ -20,6 +20,7 @@
 
 #include <stdint.h>
 #include <string.h>
+#include <stdbool.h>
 #include <math.h>
 #include <inttypes.h>
 #include <stdlib.h>
@@ -52,11 +53,14 @@ struct __una_d   { double   x PACKED_DECL; };
 extern void tolua_pushint64(lua_State* L, int64_t n);
 extern void tolua_pushuint64(lua_State *L, uint64_t n);
 
-extern int64_t tolua_toint64(lua_State* L, int n);
+extern int64_t  tolua_toint64(lua_State* L, int n);
 extern uint64_t tolua_touint64(lua_State *L, int n);
 
-extern int tolua_isint64(lua_State *L, int n);
-extern int tolua_isuint64(lua_State *L, int n);
+extern int64_t  raw_toint64(lua_State* L, int n);
+extern uint64_t raw_touint64(lua_State *L, int n);
+
+extern bool raw_isint64(lua_State *L, int n);
+extern bool raw_isuint64(lua_State *L, int n);
 
 static inline uint64_t __uld64(const void * r11)
 {
@@ -101,6 +105,7 @@ static inline double __ldd(const void * r11)
 
 
 #define IOSTRING_META "protobuf.IOString"
+#define _64BIT_KEY_COMPATIBLE_META "_64bit_key_compatible_META"
 
 #define checkiostring(L) \
     (IOString*) luaL_checkudata(L, 1, IOSTRING_META)
@@ -189,9 +194,9 @@ static int64_t _long(lua_State* L, int pos)
     }
 	else if (type == LUA_TUSERDATA)
 	{
-		if (tolua_isint64(L,pos))
+		if (raw_isint64(L,pos))
 		{
-			n = tolua_toint64(L,pos);
+			n = raw_toint64(L,pos);
 		}
 		else
 		{
@@ -228,9 +233,9 @@ static uint64_t _ulong(lua_State* L, int pos)
     }
 	else if (type == LUA_TUSERDATA)
 	{
-		if (tolua_isuint64(L,pos))
+		if (raw_isuint64(L,pos))
 		{
-			n = tolua_touint64(L,pos);
+			n = raw_touint64(L,pos);
 		}
 		else
 		{
@@ -239,6 +244,22 @@ static uint64_t _ulong(lua_State* L, int pos)
 	}
         
     return n;
+}
+
+/*不区分int64和uint64*/
+static int _is64_at_pos(lua_State* L,int pos)
+{
+    int type = lua_type(L, pos);
+    if (type == LUA_TUSERDATA)
+    {
+        return raw_isuint64(L,pos) || raw_isint64(L,pos);
+    }
+    return 0;
+}
+
+static int _is64(lua_State* L)
+{
+    return _is64_at_pos(L,-1);
 }
 
 static int varint_encoder(lua_State *L)
@@ -464,7 +485,7 @@ static int varint_decoder64(lua_State *L)
         // char buf[64];
         // sprintf(buf, "%" PRIu64, unpack_varint(buffer, len));
         // lua_pushstring(L, buf);
-		tolua_pushint64(L,(int64_t)unpack_varint(buffer, len));
+		tolua_pushuint64(L,(uint64_t)unpack_varint(buffer, len));
         lua_pushinteger(L, len + pos);
     }
     return 2;
@@ -507,7 +528,7 @@ static int signed_varint_decoder64(lua_State *L)
         //char buf[64];
        // sprintf(buf, "%" PRId64, (int64_t)unpack_varint(buffer, len));
        // lua_pushstring(L, buf);
-        tolua_pushint64(L,(int64_t)unpack_varint(buffer, len));
+        lua_pushnumber(L,(lua_Number)(int64_t)unpack_varint(buffer, len));
 		lua_pushinteger(L, len + pos);
     }
     return 2;
@@ -766,6 +787,64 @@ static int signed_varint_size(lua_State* L)
 
     return 1;
 }
+/*
+	兼容64整数(userdata)作为table的key
+	by:ruanban 2017/12/3
+*/
+static int _64bit_key_table_index(lua_State* L)
+{
+	int count = lua_gettop(L);
+    if (count == 2)
+    {
+         if (!_is64_at_pos(L,-1)) return 0;
+         uint64_t key = raw_touint64(L,-1);
+         lua_pushnil(L);
+         while(lua_next(L,1))
+         {
+            lua_pop(L,1);/*弹出value*/
+            /*如果有一个是64位数,则返回需要转换比较*/
+            if (raw_touint64(L, -1) == key)
+            {
+                lua_rawget(L,1);
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+static int _64bit_key_table_newindex(lua_State* L)
+{
+    int count = lua_gettop(L);
+    if (count == 3)
+    {
+         if (!_is64_at_pos(L,-2)) return 0;
+         uint64_t key = raw_touint64(L,-2);
+         lua_pushnil(L);
+         while(lua_next(L,1))
+         {
+            lua_pop(L,1);/*弹出value*/
+            /*如果有一个是64位数,则返回需要转换比较*/
+            if (raw_touint64(L, -1) == key)
+            {
+                lua_pushvalue(L,3);
+                lua_rawset(L,1);
+                lua_pop(L,2);
+                return 0;
+            }
+        }
+        lua_rawset(L,1);
+     }
+    return 0;
+}
+
+static int new_64bit_key_compatible_table(lua_State* L)
+{
+    lua_newtable(L);
+    luaL_getmetatable(L,_64BIT_KEY_COMPATIBLE_META);
+    lua_setmetatable(L,1);
+    return 1;
+}
 
 static const struct luaL_Reg _pb [] = 
 {
@@ -787,6 +866,7 @@ static const struct luaL_Reg _pb [] =
     {"new_iostring", iostring_new},
     {"varint_size", varint_size},
     {"signed_varint_size", signed_varint_size},
+    {"uint64_table", new_64bit_key_compatible_table},
     {NULL, NULL}
 };
 
@@ -800,12 +880,23 @@ static const struct luaL_Reg _c_iostring_m [] =
     {NULL, NULL}
 };
 
+static const struct luaL_Reg _64bit_key_compatible_table [] = 
+{
+    {"__index", _64bit_key_table_index},
+    {"__newindex", _64bit_key_table_newindex},
+    {NULL, NULL}
+};
+
 LUALIB_API int luaopen_pb (lua_State *L)
 {
     luaL_newmetatable(L, IOSTRING_META);
     lua_pushvalue(L, -1);
     lua_setfield(L, -2, "__index");
     luaL_register(L, NULL, _c_iostring_m);
+
+
+    luaL_newmetatable(L, _64BIT_KEY_COMPATIBLE_META);
+    luaL_register(L, NULL, _64bit_key_compatible_table);
 
     luaL_register(L, "pb", _pb);
     return 1;
