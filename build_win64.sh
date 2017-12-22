@@ -12,6 +12,8 @@ mingw32-make clean
 cd ..
 
 gcc -m64 -O2 -std=gnu99 -shared \
+ xlua.c \
+ perflib.c \
  tolua.c \
  int64.c \
  uint64.c \

@@ -22,3 +22,5 @@ cd android/
 ndk-build clean APP_ABI="armeabi-v7a,x86"
 ndk-build APP_ABI="armeabi-v7a"
 exit
+./build_win32.sh 
+exit

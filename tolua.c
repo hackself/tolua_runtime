@@ -2559,6 +2559,9 @@ static const struct luaL_Reg tolua_mathf[] =
     { NULL, NULL }
 };
 
+extern int luaopen_xlua(lua_State* L);
+extern int luaopen_perflib(lua_State* L);
+
 LUALIB_API void tolua_openlibs(lua_State *L)
 {   
     initmodulebuffer();
@@ -2574,6 +2577,9 @@ LUALIB_API void tolua_openlibs(lua_State *L)
     tolua_openuint64(L);
     tolua_openvptr(L);    
     //tolua_openrequire(L);
+
+    luaopen_xlua(L);
+    luaopen_perflib(L);
 
     luaL_register(L, "Mathf", tolua_mathf);     
     luaL_register(L, "tolua", tolua_funcs);    
