@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A26BD2F1FEFA0A4006EA734 /* perflib.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A26BD2D1FEFA0A4006EA734 /* perflib.c */; };
+		5A26BD301FEFA0A4006EA734 /* xlua.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A26BD2E1FEFA0A4006EA734 /* xlua.c */; };
 		844235871C58CB95001EB305 /* libluajit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 844235861C58CB95001EB305 /* libluajit.a */; };
 		84F8B8B11C45677A00AE9B8F /* pb.c in Sources */ = {isa = PBXBuildFile; fileRef = 84F8B8B01C45677A00AE9B8F /* pb.c */; };
 		84F8B8B31C45678E00AE9B8F /* tolua.c in Sources */ = {isa = PBXBuildFile; fileRef = 84F8B8B21C45678E00AE9B8F /* tolua.c */; };
@@ -35,6 +37,8 @@
 		0F4B04D71800959F002EA938 /* tolua-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "tolua-Info.plist"; sourceTree = "<group>"; };
 		0F4B04D91800959F002EA938 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0F4B04DB1800959F002EA938 /* tolua-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "tolua-Prefix.pch"; sourceTree = "<group>"; };
+		5A26BD2D1FEFA0A4006EA734 /* perflib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = perflib.c; path = ../../perflib.c; sourceTree = "<group>"; };
+		5A26BD2E1FEFA0A4006EA734 /* xlua.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = xlua.c; path = ../../xlua.c; sourceTree = "<group>"; };
 		844235861C58CB95001EB305 /* libluajit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libluajit.a; sourceTree = "<group>"; };
 		84F8B8B01C45677A00AE9B8F /* pb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pb.c; path = ../../pb.c; sourceTree = "<group>"; };
 		84F8B8B21C45678E00AE9B8F /* tolua.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tolua.c; path = ../../tolua.c; sourceTree = "<group>"; };
@@ -119,6 +123,8 @@
 				84F8B8B61C45679C00AE9B8F /* lpeg.c */,
 				84F8B8B21C45678E00AE9B8F /* tolua.c */,
 				84F8B8B41C45679700AE9B8F /* struct.c */,
+				5A26BD2D1FEFA0A4006EA734 /* perflib.c */,
+				5A26BD2E1FEFA0A4006EA734 /* xlua.c */,
 				84F8B8B01C45677A00AE9B8F /* pb.c */,
 				0F4B04D61800959F002EA938 /* Supporting Files */,
 			);
@@ -238,12 +244,14 @@
 			files = (
 				84F8B8B51C45679700AE9B8F /* struct.c in Sources */,
 				84F8B8DC1C4567C100AE9B8F /* buffer.c in Sources */,
+				5A26BD2F1FEFA0A4006EA734 /* perflib.c in Sources */,
 				84F8B8E31C4567C100AE9B8F /* options.c in Sources */,
 				84F8B8E81C4567C100AE9B8F /* udp.c in Sources */,
 				84F8B8E91C4567C100AE9B8F /* unix.c in Sources */,
 				84F8B8E41C4567C100AE9B8F /* select.c in Sources */,
 				84F8B8DB1C4567C100AE9B8F /* auxiliar.c in Sources */,
 				84F8B8B71C45679C00AE9B8F /* lpeg.c in Sources */,
+				5A26BD301FEFA0A4006EA734 /* xlua.c in Sources */,
 				84F8B8E51C4567C100AE9B8F /* serial.c in Sources */,
 				84F8B8B11C45677A00AE9B8F /* pb.c in Sources */,
 				84F8B8E11C4567C100AE9B8F /* luasocket_scripts.c in Sources */,
@@ -351,7 +359,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					../luajit-2.1/src,
+					"../luajit-2.1/src",
 				);
 				INFOPLIST_FILE = "tolua/tolua-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";

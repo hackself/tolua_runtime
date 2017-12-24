@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A26BD2A1FEFA05F006EA734 /* xlua.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A26BD291FEFA05F006EA734 /* xlua.c */; };
+		5A26BD2C1FEFA06F006EA734 /* perflib.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A26BD2B1FEFA06F006EA734 /* perflib.c */; };
 		840092821CCF406200F89A56 /* auxiliar.c in Sources */ = {isa = PBXBuildFile; fileRef = 840092611CCF406200F89A56 /* auxiliar.c */; };
 		840092831CCF406200F89A56 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 840092631CCF406200F89A56 /* buffer.c */; };
 		840092841CCF406200F89A56 /* compat.c in Sources */ = {isa = PBXBuildFile; fileRef = 840092651CCF406200F89A56 /* compat.c */; };
@@ -69,6 +71,8 @@
 		0F4B04D71800959F002EA938 /* tolua-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "tolua-Info.plist"; sourceTree = "<group>"; };
 		0F4B04D91800959F002EA938 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0F4B04DB1800959F002EA938 /* tolua-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "tolua-Prefix.pch"; sourceTree = "<group>"; };
+		5A26BD291FEFA05F006EA734 /* xlua.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = xlua.c; path = ../../xlua.c; sourceTree = "<group>"; };
+		5A26BD2B1FEFA06F006EA734 /* perflib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = perflib.c; path = ../../perflib.c; sourceTree = "<group>"; };
 		840092611CCF406200F89A56 /* auxiliar.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = auxiliar.c; sourceTree = "<group>"; };
 		840092621CCF406200F89A56 /* auxiliar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = auxiliar.h; sourceTree = "<group>"; };
 		840092631CCF406200F89A56 /* buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = buffer.c; sourceTree = "<group>"; };
@@ -206,6 +210,8 @@
 				84ED5C071C4D0749006965FF /* bit.c */,
 				84F8B8B41C45679700AE9B8F /* struct.c */,
 				84F8B8B01C45677A00AE9B8F /* pb.c */,
+				5A26BD2B1FEFA06F006EA734 /* perflib.c */,
+				5A26BD291FEFA05F006EA734 /* xlua.c */,
 				849CC46A1C9846C800D4D510 /* int64.c */,
 				8445EB121D4C9D2100397F5E /* uint64.c */,
 				84F8B8B21C45678E00AE9B8F /* tolua.c */,
@@ -407,6 +413,7 @@
 				840092871CCF406200F89A56 /* io.c in Sources */,
 				8400928C1CCF406200F89A56 /* serial.c in Sources */,
 				840092861CCF406200F89A56 /* inet.c in Sources */,
+				5A26BD2A1FEFA05F006EA734 /* xlua.c in Sources */,
 				84EF23981C4CCD3F0093A49A /* llex.c in Sources */,
 				840092901CCF406200F89A56 /* unix.c in Sources */,
 				84F8B8B71C45679C00AE9B8F /* lpeg.c in Sources */,
@@ -429,6 +436,7 @@
 				84F8B8B31C45678E00AE9B8F /* tolua.c in Sources */,
 				84EF239C1C4CCD3F0093A49A /* lobject.c in Sources */,
 				840092881CCF406200F89A56 /* luasocket.c in Sources */,
+				5A26BD2C1FEFA06F006EA734 /* perflib.c in Sources */,
 				84EF23A11C4CCD3F0093A49A /* lstring.c in Sources */,
 				842A59AB1C85B76100EA2815 /* strbuf.c in Sources */,
 				84EF23A31C4CCD3F0093A49A /* ltable.c in Sources */,
